@@ -41,6 +41,7 @@
     ]
   },
   "devDependencies": {
+    "axios": "^0.27.2",
     "nanoid": "^3.3.4",
     "prop-types": "^15.8.1"
   }
