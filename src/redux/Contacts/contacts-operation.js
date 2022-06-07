@@ -1,4 +1,4 @@
-import { createAsyncThunk, rejectWithValue } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import * as API from 'shared/services/contacts';
 
@@ -36,6 +36,20 @@ export const addContact = createAsyncThunk(
       console.log(error);
       return rejectWithValue(error.message);
     }
+  },
+  {
+    condition: (contact, { getState }) => {
+      const { contacts } = getState();
+
+      const isDuplicated = contacts.items.find(
+        item => item.name === contact.name
+      );
+
+      if (isDuplicated) {
+        alert(`${contact.name} is already in your Phone Book`);
+        return false;
+      }
+    },
   }
 );
 
